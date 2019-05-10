@@ -1,0 +1,3 @@
+rootProject.name = 'springboot-netty-mvc'
+include 'springboot-netty-mvc-rest'
+include 'netty-mvc-sample'

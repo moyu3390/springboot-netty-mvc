@@ -1,0 +1,15 @@
+// jar‘s name
+archivesBaseName = 'springboot-netty-mvc-rest'
+version='1.0.0'
+
+bootJar{
+  enabled = false
+}
+
+dependencies {
+    compile ("io.netty:netty-all:$nettyVersion")
+    compile("com.alibaba:fastjson:$fasterjsonVersion")
+    compile('org.springframework.boot:spring-boot')
+    compile("org.slf4j:slf4j-api:1.7.25")
+    
+ }

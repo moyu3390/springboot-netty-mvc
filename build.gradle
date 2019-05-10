@@ -1,0 +1,64 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.1.RELEASE'
+	}
+	repositories {
+		mavenLocal()
+        mavenCentral()
+        maven { url 'https://repo.spring.io/libs-milestone' }
+        jcenter()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+ext {
+    fasterjsonVersion='1.2.56'
+    nettyVersion='4.1.34.Final'
+}
+allprojects {
+
+group = 'com.netyards.nettymvc'
+version = '0.0.1-SNAPSHOT'
+
+}
+
+subprojects { 
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+ // default encoding is utf-8
+[compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+
+repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url 'https://repo.spring.io/libs-milestone' }
+        jcenter()
+}
+
+jar {
+        enabled=true
+}
+
+    //  print of all current project compile jars.
+    task listJars(description: 'Display all compile jars.') << {
+        configurations.compile.each { File file -> println file.name }
+    }
+
+   tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    }  
+   
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+}
